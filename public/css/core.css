@@ -1,0 +1,46 @@
+.thumbnail {
+	text-align: center;
+}
+.thumbnail:hover {
+	background-color: #f1f1f1;
+}
+
+.thumbnail:hover a {
+	text-decoration: none;
+}
+
+
+.card-icon {
+	font-size: 120px;
+	text-align: center;
+	margin-top: 20;
+	padding: 40;
+	background-color: darkred;
+	color: white;
+	border-radius: 100%;
+    width: 200px
+}
+
+.card-icon-red {
+	background-color: #7B151F;
+	color: white;
+}
+
+.card-icon-purple {
+	background-color: #3D1255;
+	color: white;
+}
+
+.card-icon-green {
+	background-color: #549431;
+	color: white;
+}
+.caption h3 {
+	font-size: 300%;
+	color: #7C7C7C;
+}
+
+.fa-exchange {
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+}

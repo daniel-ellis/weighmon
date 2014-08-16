@@ -1,0 +1,8 @@
+<div='container'>
+	<div class="row">
+		<% @cards.each do |card| %>
+			<% @card = card %>
+			<%= erb :_card %>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+<div class="col-sm-6 col-md-4 index-card">
+    <a href='<%= @card[:title].gsub(' ', '-').downcase%>'>
+        <div class="thumbnail">
+            <span class="fa <%= @card[:icon] %> card-icon card-icon-<%= @card[:color] %>"></span> 
+            <div class="caption">
+                <h3><%= @card[:title]%></h3>
+            </div>
+        </div>
+    </a>
+</div>
