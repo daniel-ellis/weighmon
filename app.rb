@@ -14,7 +14,6 @@ def kg_to_lbs(kg)
   kg * 2.2046
 end
 
-
 get '/' do
   
   @cards = [
@@ -27,9 +26,23 @@ get '/' do
 end
 
 get '/history' do
-  @hist = Weight.all
-  puts @hist
   
+  @data = []  
+  %w.roo dan..each do |name|
+    user = {
+      name: name,
+      dates: [],
+      values: []
+    }
+    (Date.today - 7 ).upto(Date.today) do |date|
+      user[:dates] << date.strftime
+      weight = Weight.where(user: name,:date.gte => date, :date.lte => date).first
+      val = weight ? kg_to_lbs(weight.weight) : 0 
+      user[:values] << val
+    end
+    @data << user
+  end
+   
   erb :history
 end
 # {"date"=>"2014-08-16 13:19:19 +0000", "mass"=>"82.88492"}

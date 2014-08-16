@@ -44,3 +44,18 @@
 	-webkit-transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
 }
+
+.graph-container {
+    width: 100%;
+    margin: 0 auto; 
+    
+}
+
+.graph {
+    margin: 10px 10px 10px 10px; 
+/*    display:inline;*/
+}
+
+.graph-title {
+     text-align: center;
+}

@@ -1,57 +1,55 @@
 <div class='row'>
-    <div class="col-sm-12 col-md-12 index-card">
-        
-        <%= kg_to_lbs(81) %>
-        <div style="width: 100%">
-            <canvas id="canvas" height="450" width="600"></canvas>
+    <div class="col-sm-8 col-md-8 index-card">
+        <div class="graph-container">
+            <canvas class='graph' id="canvas" height="450" width="600"></canvas>
         </div>
+        <h3 class='graph-title'>Last 7 days</h3>
         </div>
     </div>
 
 
 	<script>
-	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 
-	var barChartData = {
+	var lineChartData = {
         
         <%
             labels = []
             (Date.today - 7 ).upto(Date.today) { |date| labels << date }
         %>
-		labels : <%= labels.to_json %>,
+		labels : <%= @data.first[:dates] %>,
+
 		datasets : [
+            <% @data.each do |data| 
+                color = {
+                    r: rand(128) + 127,
+                    g: rand(128) + 127,
+                    b: rand(128) + 127
+                }
+            %>
 			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,0.8)",
-				highlightFill: "rgba(220,220,220,0.75)",
-				highlightStroke: "rgba(220,220,220,1)",
+                label: '<%= data[:name] %>',
+                pointColor: "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
+                fillColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.5)",
+                strokeColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.8)",
+                highlightFill : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.75)",
+                highlightStroke : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
 				data :
-// [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-                <%=
-                # user[:days].to_json
-                data = []
-                (Date.today - 7 ).upto(Date.today) do |date|
-                    # data << @hist.where(date: date)
-                    data << 23
-                end
-                data
-                %>
+                <%= data[:values].to_json %>
 			},
-			{
-				fillColor : "rgba(151,187,205,0.5)",
-				strokeColor : "rgba(151,187,205,0.8)",
-				highlightFill : "rgba(151,187,205,0.75)",
-				highlightStroke : "rgba(151,187,205,1)",
-				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-			},
+            <% end %>
 		]
 
 	}
 	window.onload = function(){
 		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myBar = new Chart(ctx).Bar(barChartData, {
-			responsive : true
-		});
+        
+        window.weightLine = new Chart(ctx).Line(lineChartData, {
+            responsive : true
+        });
+        // window.myBar = new Chart(ctx).Bar(barChartData, {
+        //     responsive : true
+        // });
+        
 	}
 
 	</script>
