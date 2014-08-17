@@ -4,10 +4,8 @@
             <canvas class='graph' id="canvas" height="450" width="600"></canvas>
         </div>
         <h3 class='graph-title'>Last 7 days</h3>
-        </div>
     </div>
-
-
+</div>
 	<script>
 
 	var lineChartData = {
@@ -47,9 +45,6 @@
         window.weightLine = new Chart(ctx).Line(lineChartData, {
             responsive : true
         });
-        // window.myBar = new Chart(ctx).Bar(barChartData, {
-        //     responsive : true
-        // });
         
 	}
 

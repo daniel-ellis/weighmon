@@ -26,8 +26,13 @@ get '/' do
 end
 
 get '/history' do
-  
-  @data = []  
+ @data = last_7  
+   
+  erb :history
+end
+
+def last_7
+  data = []  
   %w.roo dan..each do |name|
     user = {
       name: name,
@@ -40,11 +45,11 @@ get '/history' do
       val = weight ? kg_to_lbs(weight.weight) : nil
       user[:values] << val
     end
-    @data << user
+    data << user
   end
-   
-  erb :history
+  data
 end
+
 # {"date"=>"2014-08-16 13:19:19 +0000", "mass"=>"82.88492"}
 post '/weight/:name' do |name|
   body = request.body.rewind
@@ -61,6 +66,9 @@ post '/weight/:name' do |name|
       )
 end
 
+get '/tmp' do
+  weights = Weight.where(:date.gte => (Date.today - 7), :date.lte => (Date.today)).to_json
+end
 
 get '/weight/all' do
   Weight.all.to_json
