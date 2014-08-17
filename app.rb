@@ -37,7 +37,7 @@ get '/history' do
     (Date.today - 7 ).upto(Date.today) do |date|
       user[:dates] << date.strftime
       weight = Weight.where(user: name,:date.gte => date, :date.lte => date).first
-      val = weight ? kg_to_lbs(weight.weight) : 0 
+      val = weight ? kg_to_lbs(weight.weight) : nil
       user[:values] << val
     end
     @data << user
@@ -52,11 +52,12 @@ post '/weight/:name' do |name|
   puts payload
   date = payload['date']
   weight = payload['mass']
-  
+  test = payload['test']
   Weight.create( 
         user: name,
         date: date,
-        weight: weight
+        weight: weight,
+        test: test
       )
 end
 

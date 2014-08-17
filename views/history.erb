@@ -1,5 +1,5 @@
-<div class='row'>
-    <div class="col-sm-8 col-md-8 index-card">
+<div class='row row-centered'>
+    <div class="col-sm-8 col-md-8 index-card col-centered">
         <div class="graph-container">
             <canvas class='graph' id="canvas" height="450" width="600"></canvas>
         </div>
@@ -28,6 +28,7 @@
             %>
 			{
                 label: '<%= data[:name] %>',
+                bezierCurve: false,
                 pointColor: "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
                 fillColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.5)",
                 strokeColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.8)",

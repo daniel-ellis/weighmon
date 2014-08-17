@@ -47,15 +47,23 @@
 
 .graph-container {
     width: 100%;
-    margin: 0 auto; 
-    
+    margin: 0 auto;  
 }
 
 .graph {
     margin: 10px 10px 10px 10px; 
-/*    display:inline;*/
 }
 
 .graph-title {
      text-align: center;
+}
+
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    text-align: left;
+    display: inline-block;
+    float: none;
 }
