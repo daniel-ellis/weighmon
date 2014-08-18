@@ -66,10 +66,6 @@ post '/weight/:name' do |name|
       )
 end
 
-get '/tmp' do
-  weights = Weight.where(:date.gte => (Date.today - 7), :date.lte => (Date.today)).to_json
-end
-
 get '/weight/all' do
   Weight.all.to_json
 end
