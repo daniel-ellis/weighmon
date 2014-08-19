@@ -37,11 +37,11 @@ var lineChartData = {
 		{
             label: '<%= data[:name] %>',
             bezierCurve: false,
-            pointColor: "100,0,56,1)",
-            fillColor : "100,0,56,0.5)",
-            strokeColor : "100,0,56,0.8)",
-            highlightFill : "100,0,56,0.75)",
-            highlightStroke : "100,0,56,1)",
+            pointColor: "rgba(90,40,56,1)",
+            fillColor : "rgba(90,40,56,0.5)",
+            strokeColor : "rgba(90,40,56,0.8)",
+            highlightFill : "rgba(90,40,56,0.75)",
+            highlightStroke : "rgba(90,40,56,1)",
 			data : data.reverse()
 		}
 	]
