@@ -49,6 +49,11 @@
     width: 100%;
     margin: 0 auto;  
 }
+.user-graph {
+    width: 50%;
+    display: inline-block;
+    float: right;
+}
 
 .graph {
     margin: 10px 10px 10px 10px; 
@@ -66,4 +71,9 @@
     text-align: left;
     display: inline-block;
     float: none;
+}
+
+.weight-table {
+    width: 40%;
+    display: inline-block;
 }
