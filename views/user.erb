@@ -1,0 +1,28 @@
+<div class='container'>
+    <h3>Hello <%= @user[:name].gsub(/\W(.*)/,'') %>!</h3>
+    <div class='weight-table'>
+        <table class='table table-striped'>
+            <thead>
+                <th>Date</th>
+                <th>Weight</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <% @user[:weights].each do |weight| %>
+                <tr class='weigh-in'>
+                    <td class='id hide'><%= weight[:_id] %></td>
+                    <td class='time'><%=  time_ago_in_words(weight[:date]) %></td>
+                    <td class='weight'><%= kg_to_lbs(weight[:weight]) %><small>lbs</small></td>
+                    <td><a class='delete-weight'><span class='fa fa-trash-o'></span></a></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="graph-container user-graph">
+        <canvas class='graph' id="canvas" height="100" width="200"></canvas>
+    </div>
+</div>
+
+<script src='/js/user.js' type='text/javascript'></script

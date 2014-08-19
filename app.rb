@@ -11,7 +11,23 @@ set :server, 'thin'
 set :clients, []
 
 def kg_to_lbs(kg)
-  kg * 2.2046
+  (kg * 2.2046).round(2)
+end
+
+def time_ago_in_words(t)
+  time = t.to_i
+  seconds = Time.now.to_i - time
+  minutes = seconds / 60
+  hours = minutes / 60
+  days = hours / 24
+  years = days / 365
+  descriptions = ['Today', 'Yesterday', '2 days ago', '3 days ago', '4 days ago', '5 days ago']
+  if days < 6 && days >= 0
+    return descriptions[days]
+  end
+  format = '%A %d %B'
+  format += '\'%y' if years > 0 
+  t.strftime(format)
 end
 
 get '/' do
@@ -26,9 +42,38 @@ get '/' do
 end
 
 get '/history' do
- @data = last_7  
+  @data = last_7
    
   erb :history
+end
+
+get '/users' do
+  @users = %w.roo dan.
+  
+  erb :users
+end
+
+# get '/create' do
+#   User.create(
+#   full_name: 'Dan Ellis',
+#   user: 'dan',
+#   height: 70,
+#   color: 'blue'
+#   )
+# end
+
+
+get '/users/:name' do |name|
+  user = User.where(user: name).first
+  puts user
+  weights = Weight.where(user: name).desc(:date).to_a
+  @user = {
+    name: user[:full_name],
+    slug: user[:user],
+    weights: weights
+  }
+  
+  erb :user
 end
 
 def last_7
@@ -64,6 +109,10 @@ post '/weight/:name' do |name|
         weight: weight,
         test: test
       )
+end
+
+delete '/weight/:id' do |id|
+  # Weight.where(_id: id).delete
 end
 
 get '/weight/all' do
