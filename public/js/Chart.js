@@ -2404,7 +2404,7 @@
 		scaleGridLineWidth : 1,
 
 		//Boolean - Whether the line is curved between points
-		bezierCurve : false,
+		bezierCurve : true,
 
 		//Number - Tension of the bezier curve between points
 		bezierCurveTension : 0.4,

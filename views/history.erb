@@ -26,7 +26,6 @@
             %>
 			{
                 label: '<%= data[:name] %>',
-                bezierCurve: false,
                 pointColor: "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
                 fillColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.5)",
                 strokeColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.8)",
@@ -43,7 +42,8 @@
 		var ctx = document.getElementById("canvas").getContext("2d");
         
         window.weightLine = new Chart(ctx).Line(lineChartData, {
-            responsive : true
+            responsive : true,
+            bezierCurve: false,
         });
         
 	}
