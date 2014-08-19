@@ -3,7 +3,9 @@ require 'sinatra-websocket'
 require 'json'
 
 require_relative 'mongo'
+require_relative 'lib/weight_helper'
 
+include WeightHelper
 
 # require './lib/syslotem_info'
 
@@ -65,12 +67,19 @@ end
 
 get '/users/:name' do |name|
   user = User.where(user: name).first
-  puts user
+
   weights = Weight.where(user: name).desc(:date).to_a
+  change = weights.last[:weight] - weights.first[:weight]
+
+  week_weights = weights_for_between(name, Time.now - 7.days, Time.now).to_a
+  week_change = week_weights.last[:weight] - week_weights.first[:weight]
+
   @user = {
     name: user[:full_name],
     slug: user[:user],
-    weights: weights
+    weights: weights,
+    change: change,
+    week_change: week_change
   }
   
   erb :user

@@ -1,5 +1,6 @@
 <div class='container'>
     <h3>Hello <%= @user[:name].gsub(/\W(.*)/,'') %>!</h3>
+    <h3><small>You have <%= @user[:change] > 0 ? 'lost' : 'gained' %> <%= kg_to_lbs(@user[:change].abs) %> lbs since we started and <%=  @user[:week_change] > 0 ? 'lost' : 'gained' %> <%= kg_to_lbs(@user[:week_change].abs)  %>lbs this week!</small></h3>
     <div class='weight-table'>
         <table class='table table-striped'>
             <thead>
