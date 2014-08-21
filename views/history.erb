@@ -6,46 +6,41 @@
         <h3 class='graph-title'>Last 7 days</h3>
     </div>
 </div>
-	<script>
-
-	var lineChartData = {
-        
-        <%
-            labels = []
-            (Date.today - 7 ).upto(Date.today) { |date| labels << date }
+<script>
+var lineChartData = {
+    
+    <%
+        labels = []
+        (Date.today - 7 ).upto(Date.today) { |date| labels << date }
+    %>
+labels : <%= @data.first[:dates] %>,
+datasets : [
+        <% @data.each do |data|
+            color = {
+                r: rand(128) + 127,
+                g: rand(128) + 127,
+                b: rand(128) + 127
+            }
         %>
-		labels : <%= @data.first[:dates] %>,
-
-		datasets : [
-            <% @data.each do |data| 
-                color = {
-                    r: rand(128) + 127,
-                    g: rand(128) + 127,
-                    b: rand(128) + 127
-                }
-            %>
-			{
-                label: '<%= data[:name] %>',
-                pointColor: "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
-                fillColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.5)",
-                strokeColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.8)",
-                highlightFill : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.75)",
-                highlightStroke : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
-				data :
-                <%= data[:values].to_json %>
-			},
-            <% end %>
-		]
-
-	}
-	window.onload = function(){
-		var ctx = document.getElementById("canvas").getContext("2d");
-        
-        window.weightLine = new Chart(ctx).Line(lineChartData, {
-            responsive : true,
-            bezierCurve: false,
-        });
-        
-	}
-
-	</script>
+        {
+            label: '<%= data[:name] %>',
+            pointColor: "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
+            fillColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.5)",
+            strokeColor : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.8)",
+            highlightFill : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,0.75)",
+            highlightStroke : "rgba(<%= color[:r]%>,<%= color[:g]%>,<%= color[:b]%>,1)",
+            data : <%= data[:values].to_json %>
+        },
+        <% end %>
+]
+}
+window.onload = function(){
+var ctx = document.getElementById("canvas").getContext("2d");
+    
+    window.weightLine = new Chart(ctx).Line(lineChartData, {
+        responsive : true,
+        bezierCurve: false,
+    });
+    
+}
+</script>
